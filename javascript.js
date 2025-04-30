@@ -1,3 +1,6 @@
+const scoreContainer = document.querySelector("#score-container");
+const humanScoreElement = scoreContainer.firstElementChild;
+const computerScoreElement = scoreContainer.lastElementChild;
 let humanScore = 0;
 let computerScore = 0;
 
@@ -26,22 +29,35 @@ function getHumanChoice() {
     }
 }
 
+function checkScore() {
+    if (humanScore >= 5) {
+        alert("Player Wins");
+    } else if (computerScore >= 5) {
+        alert("Computer Wins");
+    }
+}
+
 function playRound(humanChoice, computerChoice) {
     if (humanChoice == computerChoice) {
-        return console.log(`Computer also threw ${computerChoice}, tie game!`)
+        console.log(`Computer also threw ${computerChoice}, tie game!`)
     } else if (humanChoice == "rock" && computerChoice == "scissors") {
         humanScore += 1;
-        return console.log("Rock beats Scissors, you win!");
+        humanScoreElement.textContent = `Player Score: ${humanScore}`;
+        console.log("Rock beats Scissors, you win!");
     } else if (humanChoice == "paper" && computerChoice == "rock") {
         humanScore += 1;
-        return console.log("Paper beats Rock, you win!");
+        humanScoreElement.textContent = `Player Score: ${humanScore}`;
+        console.log("Paper beats Rock, you win!");
     } else if (humanChoice == "scissors" && computerChoice == "paper") {
         humanScore += 1;
-        return console.log("Scissors beats Paper, you win!");
+        humanScoreElement.textContent = `Player Score: ${humanScore}`;
+        console.log("Scissors beats Paper, you win!");
     } else {
-        computerScore += 1;
-        return console.log(`Computer threw ${computerChoice}, you lose!`)
+        computerScore += 1; 
+        computerScoreElement.textContent = `Computer Score: ${computerScore}`;
+        console.log(`Computer threw ${computerChoice}, you lose!`)
     }
+    checkScore();
 }
 
 const buttons = document.querySelectorAll("button");
